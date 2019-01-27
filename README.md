@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/williammartin/omg.svg?branch=master)](https://travis-ci.com/williammartin/omg)
+
 # omg
 A collection of Open Microservice Guide structures
 
