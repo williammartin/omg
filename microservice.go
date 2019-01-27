@@ -7,4 +7,7 @@ type Microservice struct {
 
 	// Info specifies general information about the microservice.
 	Info *Info `json:"info,omitempty"`
+
+	// Lifecycle specifies the lifecycle of the microservice.
+	Lifecycle *Lifecycle `json:"lifecycle,omitempty"`
 }
