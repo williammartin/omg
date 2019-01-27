@@ -1,0 +1,41 @@
+omg: 1
+info:
+  version: 0.0.1
+  title: MinimalMicroservice
+  description: A minimal microservice
+  license:
+    name: MIT
+    url: example.com/MIT
+  contact:
+    name: John Doe
+    url: example.com/minimal
+    email: minimal@example.com
+actions:
+  foo:
+    format:
+      command: [ foo, command ]
+  bar:
+    http:
+      port: 8080
+      method: POST
+      path: /bar
+      contentType: application/json
+  common:
+    help: common action help
+    arguments:
+      dit:
+        help: arguments help
+        type: int
+        in: path
+        required: true
+        pattern: '.*'
+        enum: [ first, second, third ]
+        range:
+         min: 1
+         max: 2
+    output:
+      type: string
+      contentType: text/plain
+      properties:
+        thing:
+          type: boolean

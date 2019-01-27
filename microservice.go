@@ -10,4 +10,7 @@ type Microservice struct {
 
 	// Lifecycle specifies the lifecycle of the microservice.
 	Lifecycle *Lifecycle `json:"lifecycle,omitempty"`
+
+	// Actions specifies how to interact with the microservice.
+	Actions Actions `json:"actions,omitempty"`
 }

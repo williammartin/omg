@@ -3,9 +3,9 @@ package omg_test
 import (
 	"io/ioutil"
 
+	"github.com/ghodss/yaml"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	yaml "gopkg.in/yaml.v2"
 
 	. "github.com/williammartin/omg"
 )
@@ -49,6 +49,42 @@ var _ = Describe("OMG", func() {
 		})
 	})
 
+	Describe("actions", func() {
+		It("can unmarshal various types of actions", func() {
+			microservice := loadMicroservice("assets/actions.yml")
+			actions := microservice.Actions
+
+			By("unmarshaling format actions")
+			fooAction := actions["foo"]
+			Expect(fooAction.Format.Command).To(ConsistOf("foo", "command"))
+
+			By("unmarshaling http actions")
+			barAction := actions["bar"]
+			Expect(barAction.HTTP.Port).To(Equal(8080))
+			Expect(barAction.HTTP.Method).To(Equal("POST"))
+			Expect(barAction.HTTP.Path).To(Equal("/bar"))
+			Expect(barAction.HTTP.ContentType).To(Equal("application/json"))
+
+			By("unmarshaling common fields")
+			commonAction := actions["common"]
+			Expect(commonAction.Help).To(Equal("common action help"))
+
+			ditArg := commonAction.Arguments["dit"]
+			Expect(ditArg.Help).To(Equal("arguments help"))
+			Expect(ditArg.Type).To(Equal("int"))
+			Expect(ditArg.In).To(Equal("path"))
+			Expect(ditArg.Required).To(Equal(true))
+			Expect(ditArg.Pattern).To(Equal(".*"))
+			Expect(ditArg.Enum).To(ConsistOf("first", "second", "third"))
+			Expect(ditArg.Range.Min).To(Equal(1))
+			Expect(ditArg.Range.Max).To(Equal(2))
+
+			output := commonAction.Output
+			Expect(output.Type).To(Equal("string"))
+			Expect(output.ContentType).To(Equal("text/plain"))
+			Expect(output.Properties["thing"].Type).To(Equal("boolean"))
+		})
+	})
 })
 
 func loadMicroservice(filepath string) *Microservice {
