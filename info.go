@@ -19,7 +19,7 @@ type Info struct {
 
 type Contact struct {
 	// Name is the name of the person or company.
-	Name string `json:"name,omitempty" jsonschema:"required"`
+	Name string `json:"name,omitempty"`
 
 	// URL is the homepage of the person or company.
 	URL string `json:"url,omitempty"`

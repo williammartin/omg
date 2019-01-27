@@ -9,10 +9,10 @@ type Action struct {
 	Help string `json:"help,omitempty"`
 
 	// Format specifies that this is a CLI based microservice.
-	Format *Format `json:"format,omitempty"`
+	Format *Format `json:"format,omitempty" jsonschema:"oneOf"`
 
 	// HTTP specifies that this is an http based microservice.
-	HTTP *HTTP `json:"http,omitempty"`
+	HTTP *HTTP `json:"http,omitempty" jsonschema:"oneOf"`
 
 	// Arguments specifes named arguments.
 	Arguments Arguments `json:"arguments,omitempty"`
@@ -24,19 +24,19 @@ type Action struct {
 // Format specifies a CLI action.
 type Format struct {
 	// Command specifies the command to be executed. It must be a string or array of strings.
-	Command interface{} `json:"command,omitempty"`
+	Command interface{} `json:"command,omitempty" jsonschema:"required"`
 }
 
 // HTTP specifies an HTTP action.
 type HTTP struct {
 	// Port specifies the port on which a connection should be established.
-	Port int `json:"port,omitempty"`
+	Port int `json:"port,omitempty" jsonschema:"required"`
 
 	// Method specifies the HTTP method to be used.
-	Method string `json:"method,omitempty"`
+	Method string `json:"method,omitempty" jsonschema:"required"`
 
 	// Path specifies the path on which this action should be executed.
-	Path string `json:"path,omitempty"`
+	Path string `json:"path,omitempty" jsonschema:"required"`
 
 	// ContentType specifies the type of the request body. If any microservice arguments
 	// have their `in` field set to `requestBody`, they should be encoded with this content type.
@@ -52,10 +52,10 @@ type Argument struct {
 	Help string `json:"help,omitempty"`
 
 	// Type specifies the data type e.g. int, float, string, etc
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" jsonschema:"required,enum=int|float|string|list|map|boolean|enum"`
 
 	// In specifies the location of this argument e.g. requestBody, query or path.
-	In string `json:"in,omitempty"`
+	In string `json:"in,omitempty" jsonschema:"required,enum=requestBody|query|path"`
 
 	// Required specifies whether this argument is required or not.
 	Required bool `json:"required,omitempty"`
@@ -82,7 +82,7 @@ type Range struct {
 // Output specifies the details of a action's output.
 type Output struct {
 	// Type specifies the data type e.g. int, float, string, object, etc.
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" jsonschema:"required,enum=int|float|string|list|map|boolean|object"`
 
 	// ContentType specifies the content-type if the type was object.
 	ContentType string `json:"contentType,omitempty"`
@@ -94,5 +94,5 @@ type Output struct {
 // Proprty specifies details about the content of an output.
 type Property struct {
 	// Type specifies the data type e.g. int, float, string, object, etc.
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" jsonschema:"required,enum=int|float|string|list|map|boolean|object"`
 }
