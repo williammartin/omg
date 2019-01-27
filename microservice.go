@@ -13,4 +13,7 @@ type Microservice struct {
 
 	// Actions specifies how to interact with the microservice.
 	Actions Actions `json:"actions,omitempty"`
+
+	// Environment specifies environment variables that should be exposed to the microservice.
+	Environment Environment `json:"environment,omitempty"`
 }

@@ -31,7 +31,7 @@ var _ = Describe("OMG", func() {
 	})
 
 	Describe("lifecycle hooks", func() {
-		It("can unmarshal an OMG microservice with lifecycle hooks", func() {
+		It("can unmarshal a microservice with lifecycle hooks", func() {
 			microservice := loadMicroservice("assets/lifecycle.yml")
 
 			lifecycle := microservice.Lifecycle
@@ -40,7 +40,7 @@ var _ = Describe("OMG", func() {
 			Expect(lifecycle.Shutdown.Timeout).To(Equal(60))
 		})
 
-		It("can unmarshal an OMG microservice with string array commands", func() {
+		It("can unmarshal a microservice with string array commands", func() {
 			microservice := loadMicroservice("assets/array_lifecycle.yml")
 
 			lifecycle := microservice.Lifecycle
@@ -84,6 +84,19 @@ var _ = Describe("OMG", func() {
 			Expect(output.ContentType).To(Equal("text/plain"))
 			Expect(output.Properties["thing"].Type).To(Equal("boolean"))
 		})
+	})
+
+	Describe("environment", func() {
+		It("can unmarshal a microservice with environment variable requirements", func() {
+			microservice := loadMicroservice("assets/environment.yml")
+			environment := microservice.Environment
+
+			Expect(environment["ENV_VAR"].Type).To(Equal("string"))
+			Expect(environment["ENV_VAR"].Pattern).To(Equal(".*"))
+			Expect(environment["ENV_VAR"].Required).To(BeTrue())
+			Expect(environment["ENV_VAR"].Help).To(Equal("env var help"))
+		})
+
 	})
 })
 
