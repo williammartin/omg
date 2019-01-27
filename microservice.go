@@ -16,4 +16,7 @@ type Microservice struct {
 
 	// Environment specifies environment variables that should be exposed to the microservice.
 	Environment Environment `json:"environment,omitempty"`
+
+	// Volumes specifies volumes that should be provided to the microservice.
+	Volumes Volumes `json:"volumes,omitempty"`
 }

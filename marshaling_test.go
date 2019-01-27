@@ -96,7 +96,16 @@ var _ = Describe("OMG", func() {
 			Expect(environment["ENV_VAR"].Required).To(BeTrue())
 			Expect(environment["ENV_VAR"].Help).To(Equal("env var help"))
 		})
+	})
 
+	Describe("volumes", func() {
+		It("can unmarshal a microservice with volume requirements", func() {
+			microservice := loadMicroservice("assets/volumes.yml")
+			volumes := microservice.Volumes
+
+			Expect(volumes["disk"].Target).To(Equal("/mnt/data"))
+			Expect(volumes["disk"].Persist).To(BeTrue())
+		})
 	})
 })
 
