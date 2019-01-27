@@ -24,7 +24,7 @@ type Action struct {
 // Format specifies a CLI action.
 type Format struct {
 	// Command specifies the command to be executed. It must be a string or array of strings.
-	Command interface{} `json:"command,omitempty" jsonschema:"required"`
+	Command []string `json:"command,omitempty" jsonschema:"required"`
 }
 
 // HTTP specifies an HTTP action.
