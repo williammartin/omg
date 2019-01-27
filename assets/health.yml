@@ -1,0 +1,17 @@
+omg: 1
+info:
+  version: 0.0.1
+  title: MinimalMicroservice
+  description: A minimal microservice
+  license:
+    name: MIT
+    url: example.com/MIT
+  contact:
+    name: John Doe
+    url: example.com/minimal
+    email: minimal@example.com
+health:
+  interval: 30
+  timeout: 30
+  retries: 3
+  command: [ check, health, please ]

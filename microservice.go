@@ -19,4 +19,7 @@ type Microservice struct {
 
 	// Volumes specifies volumes that should be provided to the microservice.
 	Volumes Volumes `json:"volumes,omitempty"`
+
+	// Healthcheck specifies how the health of the microservice should be checked.
+	Healthcheck *Healthcheck `json:"health,omitempty"`
 }

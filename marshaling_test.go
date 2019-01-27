@@ -107,6 +107,18 @@ var _ = Describe("OMG", func() {
 			Expect(volumes["disk"].Persist).To(BeTrue())
 		})
 	})
+
+	Describe("healthcheck", func() {
+		It("can unmarshal a microservice that specifies a healthcheck", func() {
+			microservice := loadMicroservice("assets/health.yml")
+			healthcheck := microservice.Healthcheck
+
+			Expect(healthcheck.Interval).To(Equal(30))
+			Expect(healthcheck.Timeout).To(Equal(30))
+			Expect(healthcheck.Retries).To(Equal(3))
+			Expect(healthcheck.Command).To(ConsistOf("check", "health", "please"))
+		})
+	})
 })
 
 func loadMicroservice(filepath string) *Microservice {
