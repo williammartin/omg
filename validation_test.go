@@ -331,6 +331,21 @@ var _ = Describe("Schema Validation", func() {
 			))
 		})
 	})
+
+	Describe("Volumes", func() {
+		Describe("the volume", func() {
+			It("requires a type", func() {
+				volumes := Volumes{
+					"disk": &Volume{},
+				}
+
+				microservice := &Microservice{Volumes: volumes}
+				valid, errors := validate(microservice)
+				Expect(valid).To(BeFalse())
+				Expect(errors).To(ContainElement("volumes.disk: target is required"))
+			})
+		})
+	})
 })
 
 func validate(microservice *Microservice) (bool, []string) {
