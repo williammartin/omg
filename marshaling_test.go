@@ -119,6 +119,19 @@ var _ = Describe("OMG", func() {
 			Expect(healthcheck.Command).To(ConsistOf("check", "health", "please"))
 		})
 	})
+
+	Describe("system requirements", func() {
+		It("can unmarshal a microservice that specifies system requirements", func() {
+			microservice := loadMicroservice("assets/system.yml")
+			system := microservice.System
+
+			Expect(system.Soft.CPU).To(Equal(0.5))
+			Expect(system.Soft.Memory).To(Equal("1GB"))
+
+			Expect(system.Hard.CPU).To(Equal(1.0))
+			Expect(system.Hard.Memory).To(Equal("1GB"))
+		})
+	})
 })
 
 func loadMicroservice(filepath string) *Microservice {

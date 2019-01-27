@@ -1,0 +1,19 @@
+omg: 1
+info:
+  version: 0.0.1
+  title: MinimalMicroservice
+  description: A minimal microservice
+  license:
+    name: MIT
+    url: example.com/MIT
+  contact:
+    name: John Doe
+    url: example.com/minimal
+    email: minimal@example.com
+system:
+  soft:
+    cpu: 0.5
+    memory: 1GB
+  hard:
+    cpu: 1
+    memory: 1GB

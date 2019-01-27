@@ -22,4 +22,7 @@ type Microservice struct {
 
 	// Healthcheck specifies how the health of the microservice should be checked.
 	Healthcheck *Healthcheck `json:"health,omitempty"`
+
+	// System specifies the system requirements of the microservice.
+	System *System `json:"system,omitempty"`
 }
