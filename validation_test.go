@@ -3,11 +3,11 @@ package omg_test
 import (
 	"encoding/json"
 
-	"github.com/discovery-digital/jsonschema"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/xeipuuv/gojsonschema"
 
+	"github.com/williammartin/jsonschema"
 	. "github.com/williammartin/omg"
 )
 
@@ -299,6 +299,36 @@ var _ = Describe("Schema Validation", func() {
 					"actions.action.output.properties.prop.type: actions.action.output.properties.prop.type must be one of the following: \"int\", \"float\", \"string\", \"list\", \"map\", \"boolean\", \"object\"",
 				))
 			})
+		})
+	})
+
+	Describe("Environment", func() {
+		Describe("the environment variables", func() {
+			It("requires a type", func() {
+				environment := Environment{
+					"var": &Variable{},
+				}
+
+				microservice := &Microservice{Environment: environment}
+				valid, errors := validate(microservice)
+				Expect(valid).To(BeFalse())
+				Expect(errors).To(ContainElement("environment.var: type is required"))
+			})
+		})
+
+		It("requires variables must be of a particular type", func() {
+			environment := Environment{
+				"var": &Variable{
+					Type: "not-valid",
+				},
+			}
+
+			microservice := &Microservice{Environment: environment}
+			valid, errors := validate(microservice)
+			Expect(valid).To(BeFalse())
+			Expect(errors).To(ContainElement(
+				"environment.var.type: environment.var.type must be one of the following: \"int\", \"float\", \"string\", \"boolean\"",
+			))
 		})
 	})
 })

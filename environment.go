@@ -9,7 +9,7 @@ type Variable struct {
 	Help string `json:"help,omitempty"`
 
 	// Type specifies the type of the environment variable.
-	Type string `json:"type,omitempty"`
+	Type string `json:"type,omitempty" jsonschema:"required,enum=int|float|string|boolean"`
 
 	// Pattern specifies the a pattern which the environment variable must match.
 	Pattern string `json:"pattern,omitempty"`
