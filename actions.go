@@ -64,7 +64,7 @@ type Argument struct {
 	Pattern string `json:"pattern,omitempty"`
 
 	// Enum specifies a list of options which this argument can be.
-	Enum []interface{} `json:"enum,omitempty"`
+	Enum []string `json:"enum,omitempty"`
 
 	// Range specifies a min and max bounds for this argument.
 	Range *Range `json:"range,omitempty"`
