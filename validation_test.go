@@ -13,22 +13,32 @@ import (
 
 var _ = Describe("Schema Validation", func() {
 	Describe("the microservice", func() {
-		Describe("the omg version", func() {
-			It("is required", func() {
-				microservice := &Microservice{}
-				valid, errors := validate(microservice)
-				Expect(valid).To(BeFalse())
-				Expect(errors).To(ContainElement("(root): omg is required"))
-			})
+		It("requires an OMG version", func() {
+			microservice := &Microservice{}
+			valid, errors := validate(microservice)
+			Expect(valid).To(BeFalse())
+			Expect(errors).To(ContainElement("(root): omg is required"))
 		})
 
-		Describe("the microservice info", func() {
-			It("is required", func() {
-				microservice := &Microservice{}
-				valid, errors := validate(microservice)
-				Expect(valid).To(BeFalse())
-				Expect(errors).To(ContainElement("(root): info is required"))
-			})
+		It("requires info", func() {
+			microservice := &Microservice{}
+			valid, errors := validate(microservice)
+			Expect(valid).To(BeFalse())
+			Expect(errors).To(ContainElement("(root): info is required"))
+		})
+
+		It("requires actions", func() {
+			microservice := &Microservice{}
+			valid, errors := validate(microservice)
+			Expect(valid).To(BeFalse())
+			Expect(errors).To(ContainElement("(root): actions is required"))
+		})
+
+		It("requires lifecycle hooks", func() {
+			microservice := &Microservice{}
+			valid, errors := validate(microservice)
+			Expect(valid).To(BeFalse())
+			Expect(errors).To(ContainElement("(root): lifecycle is required"))
 		})
 	})
 
