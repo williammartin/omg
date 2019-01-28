@@ -31,16 +31,6 @@ var _ = Describe("OMG", func() {
 	})
 
 	Describe("lifecycle hooks", func() {
-		// TODO: Fix jsonschema to allow for both strings and arrays in type definitions
-		PIt("can unmarshal a microservice with lifecycle hooks", func() {
-			microservice := loadMicroservice("assets/lifecycle.yml")
-
-			lifecycle := microservice.Lifecycle
-			Expect(lifecycle.Startup.Command).To(Equal("startup"))
-			Expect(lifecycle.Shutdown.Command).To(Equal("shutdown"))
-			Expect(lifecycle.Shutdown.Timeout).To(Equal(60))
-		})
-
 		It("can unmarshal a microservice with string array commands", func() {
 			microservice := loadMicroservice("assets/array_lifecycle.yml")
 
